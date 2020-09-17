@@ -1,0 +1,92 @@
+.nav_panel {
+    background-color: #77A1CB;
+}
+
+.nav_img {
+    background-image: url(/img/JobScanner-Header-blue.png);
+}
+input[type=radio]:checked + label {
+    color: #77A1CB;
+}
+
+
+.check:checked + label:before {
+    background: #77A1CB;
+}
+
+input[type=radio]:checked + label:before {
+    border: 2px solid #77A1CB !important;
+    background: #77A1CB;
+    color: #fff;
+    line-height: 1;
+    content: "";
+    background-image: url(/img/check.png);
+    background-size: 13px 12px;
+}
+
+#cssmenu ul ul li p:hover {
+    color: #77A1CB !important;
+}
+
+.right_menu a:hover {
+    color: #77A1CB;
+}
+
+.check:checked + label {
+    color: #77A1CB;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #77A1CB;
+}
+
+a.file-btn, .upload-result,
+.save_profile_btn, .add_vacansy_btn,
+.send_answer, .send_message {
+    background-color: #4680B9;
+}
+
+.payment_page .replenish_balance {
+    background-color: #4680B9 !important;
+}
+
+.payment_page .replenish_balance:hover {
+    background-color: #77A1CB !important;
+}
+
+a.file-btn:hover, .upload-result:hover,
+.save_profile_btn:hover, .add_vacansy_btn:hover,
+.send_answer:hover, .send_message:hover {
+    background-color: #77A1CB;
+}
+
+.vacansy_block.active_block {
+    border: 3px solid #77A1CB;
+}
+
+.lds-ellipsis span {
+    background: #77A1CB;
+}
+
+.open_close_menu:hover {
+    color: #77A1CB;
+}
+
+@media all and (max-width: 768px), only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: 1024px), only screen and (min--moz-device-pixel-ratio: 2) and (max-width: 1024px), only screen and (-o-min-device-pixel-ratio: 2/1) and (max-width: 1024px), only screen and (min-device-pixel-ratio: 2) and (max-width: 1024px), only screen and (min-resolution: 192dpi) and (max-width: 1024px), only screen and (min-resolution: 2dppx) and (max-width: 1024px) {
+    .nav_img {
+        background: none;
+    }
+
+    .left_side {
+        background: #77A1CB;
+    }
+
+    #cssmenu .submenu-button.submenu-opened {
+        background: #77A1CB;
+    }
+
+}
+
+
+
+

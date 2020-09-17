@@ -1,0 +1,35 @@
+<ifModule mod_headers.c>
+    Header always set Access-Control-Allow-Origin: "*"
+    Header always set Access-Control-Allow-Methods "POST, GET, PUT, DELETE, OPTIONS"
+    Header always set Access-Control-Allow-Headers "X-Requested-With, content-type, authorization"
+</ifModule> 
+
+Options +SymLinksIfOwnerMatch -Indexes
+IndexIgnore */*
+
+<ifModule deflate_module>
+    AddOutputFilterByType DEFLATE text/html text/xml text/css text/plain
+    AddOutputFilterByType DEFLATE image/svg+xml application/xhtml+xml application/xml
+    AddOutputFilterByType DEFLATE application/rdf+xml application/rss+xml application/atom+xml
+    AddOutputFilterByType DEFLATE text/javascript application/javascript application/x-javascript application/json
+    AddOutputFilterByType DEFLATE application/x-font-ttf application/x-font-otf
+    AddOutputFilterByType DEFLATE font/truetype font/opentype
+</ifModule>
+
+RewriteEngine on
+
+RewriteBase /
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule . index.php
+
+RewriteCond %{HTTPS} =off
+RewriteCond %{REQUEST_URI} !^/chat
+RewriteCond %{REQUEST_URI} !^/socket.io
+RewriteCond %{REQUEST_URI} !^/m/^
+RewriteCond %{REQUEST_URI} !^/mobile
+RewriteCond %{REQUEST_URI} !^/mobile
+
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]

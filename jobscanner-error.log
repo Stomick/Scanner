@@ -1,0 +1,17 @@
+[Wed Mar 04 21:12:21.090774 2020] [authz_core:error] [pid 12258:tid 140586988316416] [client 106.53.30.222:42696] AH01630: client denied by server configuration: /var/www/server/frontend/web/.php
+[Thu Mar 05 01:59:30.558255 2020] [authz_core:error] [pid 12257:tid 140587107563264] [client 132.232.201.218:14420] AH01630: client denied by server configuration: /var/www/server/frontend/web/.php
+[Tue Mar 31 07:48:44.569130 2020] [core:error] [pid 5580:tid 140196067669760] [client 93.174.93.91:40170] AH00126: Invalid URI in request GET HTTP/1.1 HTTP/1.1
+[Sat Apr 04 15:12:14.803701 2020] [authz_core:error] [pid 31234:tid 140195886216960] [client 45.202.1.122:63596] AH01630: client denied by server configuration: /var/www/server/frontend/web/.php
+[Sun Apr 05 12:42:28.072707 2020] [authz_core:error] [pid 25473:tid 140195911395072] [client 45.40.241.103:43467] AH01630: client denied by server configuration: /var/www/server/frontend/web/.php
+[Sat Apr 11 11:24:41.929337 2020] [core:error] [pid 26632:tid 140195936573184] [client 45.43.18.112:35994] AH00126: Invalid URI in request GET (null) HTTP/1.0
+[Fri Apr 17 01:11:35.432738 2020] [authz_core:error] [pid 30066:tid 140195869431552] [client 113.142.72.2:4246] AH01630: client denied by server configuration: /var/www/server/frontend/web/.php
+[Wed Apr 22 12:04:48.167676 2020] [authz_core:error] [pid 26207:tid 140195886216960] [client 154.8.182.225:11613] AH01630: client denied by server configuration: /var/www/server/frontend/web/.php
+[Mon May 04 14:24:09.950442 2020] [authz_core:error] [pid 3996:tid 140195961751296] [client 83.98.243.180:45493] AH01630: client denied by server configuration: /var/www/server/frontend/web/.php
+[Sun May 17 03:07:47.616953 2020] [authz_core:error] [pid 32346:tid 140196092847872] [client 123.51.222.158:60570] AH01630: client denied by server configuration: /var/www/server/frontend/web/.php
+[Mon May 18 01:38:07.065306 2020] [proxy_fcgi:error] [pid 28735:tid 140195936573184] [client 45.15.10.193:54641] AH01071: Got error 'Primary script unknown\n'
+[Sun May 24 21:36:59.660299 2020] [authz_core:error] [pid 29563:tid 140195911395072] [client 129.226.63.10:6895] AH01630: client denied by server configuration: /var/www/server/frontend/web/.php
+[Mon May 25 00:09:54.808232 2020] [authz_core:error] [pid 29563:tid 140196109117184] [client 103.214.165.214:39377] AH01630: client denied by server configuration: /var/www/server/frontend/web/.php
+[Tue May 26 11:01:29.185647 2020] [authz_core:error] [pid 7652:tid 140195978536704] [client 187.202.167.186:5734] AH01630: client denied by server configuration: /var/www/server/frontend/web/.php
+[Tue Jun 02 23:05:45.641642 2020] [authz_core:error] [pid 16304:tid 140195970144000] [client 118.25.70.71:12537] AH01630: client denied by server configuration: /var/www/server/frontend/web/.php
+[Tue Sep 01 20:50:28.356653 2020] [core:error] [pid 10036] [client 165.233.38.100:58056] AH00126: Invalid URI in request GET HTTP/1.1 HTTP/1.1
+[Thu Sep 03 05:25:57.991595 2020] [authz_core:error] [pid 1220] [client 47.247.111.116:53224] AH01630: client denied by server configuration: /var/www/server/frontend/web/server-status
