@@ -148,7 +148,7 @@ $(document).ready(function(){
     $('#cssmenu').hover(
         function() {
             $(".left_menu_container").removeClass('max_height');
-        },
+        }
     );
 });
 

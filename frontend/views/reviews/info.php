@@ -11,7 +11,7 @@ $ans = \models\Reviews::findOne(['answer' => $rev->id]);
                     <a href="/profile/reviews/ID<?=$rev->user_to?>.html">К списку отзывов</a>
                 </h2>
                 <div class="rev_block_left">
-                    <img src="<?= $user->logo ?>" alt="logo">
+                    <img src="<?= Yii::$app->user->isGuest || !Yii::$app->user->identity->type ? $user->comp_logo : $user->logo ?>" alt="logo">
                     <div>
                         <span>"<?= $user->company ?>"</span>
                         <span style="font-weight: 400; color: #816A7E;">написал отзыв <?= date('d.m.Y, H:i', $rev->created_at) ?></span>
@@ -45,7 +45,7 @@ $ans = \models\Reviews::findOne(['answer' => $rev->id]);
                 ?>
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="rev_block_left">
-                        <img src="<?= $ansU->logo ?>" alt="logo">
+                        <img src="<?= Yii::$app->user->isGuest || $ansU->type ? $ansU->comp_logo : $ansU->logo ?>" alt="logo">
                         <div>
                             <span>"<?= $ansU->company ?>"</span>
                             <span style="font-weight: 400; color: #816A7E;">ответил на отзыв <?= date('d.m.Y, H:i', $ans->created_at) ?></span>

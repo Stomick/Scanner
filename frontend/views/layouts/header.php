@@ -39,9 +39,17 @@
 
                     <div class="modal-footer">
                         <input class="btn-modal" type="submit" value="Войти"/>
-                        <a class="forgot_password" href="/">Забыли пароль?</a>
+                        <a class="forgot_password" href="javascript:void (0)" onclick="R()">Забыли пароль?</a>
+                        <script>
+                            function R() {
+                                $('#myModalLogin').modal('hide');
+                                setTimeout(function () {
+                                    $('#myModalRestore').modal('show');
+                                }, 500);
+                            }
+                        </script>
                         <p>
-                            Ещё не с нами? <a style="cursor: pointer" href="javascript:void()" onclick="f()">Зарегистрируйтесь</a>
+                            Ещё не с нами? <a style="cursor: pointer" href="javascript:void(0)" onclick="f()">Зарегистрируйтесь</a>
                             <script>
                                 function f() {
                                     $('#myModalLogin').modal('hide');
@@ -85,6 +93,33 @@
                         <input class="btn-modal" type="submit" value="Присоединиться"/>
                         <p>
                             Регистрируясь, вы принимаете <a href="/">правила и условия</a>, а также <a href="/">политику конфиденциальности</a> компании ООО "Коэнко"
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModalRestore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" style="padding: 5% 0px" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h3>Восстановление пароля</h3>
+                <form action="/restorepas.html" method="post">
+                    <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>"
+                           value="<?= Yii::$app->request->getCsrfToken(); ?>"/>
+
+                    <span>E-mail</span>
+                        <input type="email" required name="Restore[email]" placeholder="Ваш E-mail">
+                    <div class="modal-footer">
+                        <input class="btn-modal" type="submit" value="Востановить"/>
+                        <p>
+                            Инстукции по восстановлению пароля буду отправлены на указанную вами почту
                         </p>
                     </div>
                 </form>

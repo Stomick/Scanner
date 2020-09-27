@@ -1,5 +1,10 @@
 <?php
-$this->title = "Профиль пользователя";
+if(Yii::$app->user->isGuest) {
+    $this->title = $prof->type ?  "Профиль Нанимателя" : "Профиль Соискателя";
+}else{
+    $this->title = Yii::$app->user->identity->type ? "Профиль Нанимателя" : "Профиль Соискателя";
+}
+
 ?>
 
 <link rel="stylesheet" href="/croper/croppie.css"/>

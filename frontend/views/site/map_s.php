@@ -69,7 +69,7 @@ $curr = [
         <?php } else {?>
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition);
-            // Getspecialties(lat, lng, zoom);
+             Getspecialties(lat, lng, zoom);
         }
         <?php }?>
 
@@ -234,7 +234,7 @@ $curr = [
             var token = $('input[name="_csrf"]').val();
             $(".preloader, .load_icon").addClass('display_block');
             $.ajax({
-                url: '/<?=$mtype?>/list.html',
+                url: '/specialties/list.html',
                 type: 'post',
                 dataType: "json",
                 data: {_csrf: token, lat: lat, lng: lng, z: zoom, f: $('#specfilter').serializeArray()},
@@ -250,7 +250,7 @@ $curr = [
                             var imgBlock = '<div class="slide_img_block">' +
                                     '                        <img class="" src="' + vac.photo + '"/>' +
                                     '                    </div>';
-
+                            <?php if(\Yii::$app->mobileDetect->isDesktop){?>
                             var vacStr = '<div class="row" id="vac' + vac.id + '">' +
                                 '    <div class="vacansy_block">' +
                                 '        <div class="col-md-3 col-xs-12">' +
@@ -287,11 +287,15 @@ $curr = [
                                 '<hr>'+
                                 '                        </span>' +
                                 '<span style="float:left; font-size: 14px;">' + vac.send + '</span>'+
-                                '            <a style="float: right; margin-top: 5px; display: block;" href="tel:' + vac.phone + '">' + vac.phone + '</a>' +
                                 '        </div>' +
                                 '    </div>' +
                                 '</div>';
+                            <?php }
+                            //Код дл моб верстки в меню
+                            else {?>
 
+
+                            <?php }?>
                             var v = document.getElementById('vac' + vac.id);
                             if (v==null) {
 
@@ -340,7 +344,6 @@ $curr = [
                                             //'<span>' + vac.description + '</span>\n' +
 
                                     '<span class="offer_job">' + vac.send + '</span>\n' +
-                                    '<a class="job_tell" href="tel:' + vac.phone + '">' + vac.phone + '</a>\n' +
 
                                             // vac.review +
                                             //'<a href="/<?=$mtype?>/info/ID' + vac.id + '.html">Подробнее</a>' +

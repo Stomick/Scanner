@@ -583,6 +583,7 @@ input[type=radio]:checked + label {
 }
 
 #myModalLogin .modal-header,
+#myModalRestore .modal-header,
 #myModalRegistration .modal-header {
     background-image: url(/img/JobScanner-img-registration.jpg);
     background-size: cover;
@@ -2123,9 +2124,6 @@ span.salary {
     text-align: center;
 }
 
-.reviews_index {
-    margin: 0 15px;
-}
 
 .reviews_index .info_logo_user {
     width: 100%;

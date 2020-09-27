@@ -217,7 +217,7 @@ class MUser extends ActiveRecord implements IdentityInterface
     public function getTakeAnswers($type = 'vacancies')
     {
         return \models\Vacancies::find()
-            ->from($type . ' vsp')
+            ->from(($this->type ? "vacancies" : "specialties") . ' vsp')
             ->select([
                 'DISTINCT(chr.room_id)',
                 'chr.type',
@@ -334,8 +334,8 @@ class MUser extends ActiveRecord implements IdentityInterface
         $text = '<h3>Для активации аккаунта, пожалуйста, перейдите по ссылке ниже</h3>';
         $text .= '<br/>Вы указали данный электронный адрес для регистрации в качестве Пользователя на сайте <a href="https://jobscanner.online">JOBSCANNER.ONLINE</a>' .
                  '<br/>' . 'Для завершения регистрации перейдите, пожалуйста, по ссылке ';
-        $text .= '<br><a href="https://jobscanner.online/profile/activation.html?key=' . $key . '">Активировать</a>';
-
+        $text .= '<br><a href="https://jobscanner.online/profile/activation.html?key=' . $key . '">Активировать</a><br/><br/>';
+        $text .= 'С уважением, Команда JOBSCANNER<br/>Служба технической поддержки: support@jobscanner.online';
         return mail($this->email, 'Активация аккаунта на jobscanner.online', $text, $headers);
     }
 
@@ -350,6 +350,26 @@ class MUser extends ActiveRecord implements IdentityInterface
     }
 
     public function SendCloseSpecEmail($key = '')
+    {
+        $headers = 'MIME-Version: 1.0' . "\r\n";
+        $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+        $headers .= 'From: Jobscanner <noreply@jobscanner.online>' . "\r\n";
+
+        $text = '<h3>Специальность "' . $key . '" снята с публикации из за низкого баланса</h3>';
+        return mail($this->email, 'Специальность "' . $key . '" на jobscanner.online', $text, $headers);
+    }
+
+    public function SendNewSpecEmail($key = '')
+    {
+        $headers = 'MIME-Version: 1.0' . "\r\n";
+        $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+        $headers .= 'From: Jobscanner <noreply@jobscanner.online>' . "\r\n";
+
+        $text = '<h3>Специальность "' . $key . '" снята с публикации из за низкого баланса</h3>';
+        return mail($this->email, 'Специальность "' . $key . '" на jobscanner.online', $text, $headers);
+    }
+
+    public function SendNewVacEmail($key = '')
     {
         $headers = 'MIME-Version: 1.0' . "\r\n";
         $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";

@@ -26,6 +26,14 @@ AppAsset::register($this);
     <link href="/css/<?= Yii::$app->user->isGuest || !Yii::$app->user->identity->type ? 'work' : 'spec'?>-theme.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <?php if(!Yii::$app->user->isGuest){?>
+    <script src="/js/socket.io.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+
+    <script type="text/javascript" src="https://www.gstatic.com/firebasejs/7.21.0/firebase-app.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/firebasejs/7.21.0/firebase-messaging.js"></script>
+    <script type="text/javascript" src="/firebase_subscribe.js"></script>
+    <?php }?>
 
 </head>
 <body>
@@ -33,12 +41,11 @@ AppAsset::register($this);
 
 <div class="wrap">
     <?php if(!Yii::$app->user->isGuest){?>
-        <script src="/js/socket.io.js"></script>
     <?php include 'inheader.php'; } else{?>
     <?php include 'header.php'; }?>
     <script src="/js/slick.js"></script>
     <script src="/js/imask.js"></script>
-    <script src="/js/main.js?v=1.01.1"></script>
+    <script src="/js/main.js?v=1.11.1"></script>
     <script src="/js/bootstrap-slider.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <div class="container-fluid">

@@ -46,6 +46,18 @@ class Reviews extends ActiveRecord {
         ];
     }
 
+    public static function getMyRating($userId , $type = 0){
+        $type = !\Yii::$app->user->identity->type ? 'employer' : 'worker';
+
+        return [
+            self::find()->where(['user_to' => $userId , 'rating'=>1, 'answer' => 0, 'type' => $type])->count(),
+            self::find()->where(['user_to' => $userId , 'rating'=>2, 'answer' => 0, 'type' => $type])->count(),
+            self::find()->where(['user_to' => $userId , 'rating'=>3, 'answer' => 0, 'type' => $type])->count(),
+            self::find()->where(['user_to' => $userId , 'rating'=>4, 'answer' => 0, 'type' => $type])->count(),
+            self::find()->where(['user_to' => $userId , 'rating'=>5, 'answer' => 0, 'type' => $type])->count(),
+        ];
+    }
+
     public static function getAllRating($userId, $type =0){
 
         if(\Yii::$app->user->isGuest){
@@ -73,6 +85,20 @@ class Reviews extends ActiveRecord {
             }
         }
 
+        $sum = self::find()->select(['SUM(rating) / COUNT(id) as sum'])->where(['user_to' => $userId , 'answer' => 0, 'type' => $type])->asArray()->one();
+        return $sum['sum'] ;//== 0 ? 1 : $sum['sum'];
+    }
+
+    public static function getMyAllRating($userId, $type =0){
+
+        $type = !\Yii::$app->user->identity->type ? 'employer' : 'worker';
+
+        return self::find()->where(['user_to' => $userId , 'answer' => 0, 'type' => $type])->count();
+    }
+
+    public static function getMySumRating($userId , $type = 0 ){
+
+        $type = !\Yii::$app->user->identity->type ? 'employer' : 'worker';
         $sum = self::find()->select(['SUM(rating) / COUNT(id) as sum'])->where(['user_to' => $userId , 'answer' => 0, 'type' => $type])->asArray()->one();
         return $sum['sum'] ;//== 0 ? 1 : $sum['sum'];
     }

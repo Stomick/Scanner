@@ -194,11 +194,13 @@ class VacanciesController extends Controller
                         ]);
                 }
             }
-        }elseif(strpos ($id,'CHAT') !== false) {
+        }
+
+        if(strpos ($id,'CHAT') == 0) {
             $id = str_replace('CHAT', '', $id);
             if (Yii::$app->user->id) {
                 $mess = '';
-                    if (!$room = ChatRoom::find()
+                    if ($room = ChatRoom::find()
                         ->innerJoin('chat_user_to_rooms cutr2', 'cutr2.room_id=chat_rooms.room_id AND cutr2.user_id=' . Yii::$app->user->id)
                         ->where(['chat_rooms.room_id' => $id])->one()) {
                         $vac = Vacancies::findOne($room->type_id);
@@ -379,7 +381,7 @@ class VacanciesController extends Controller
                 if (isset($vacBody['toGalery'])) {
                     return $this->redirect('/vacancies/edit/ID' . $vac->id . '.html');
                 } else {
-                    Yii::$app->session->setFlash('success', "Вакансия \"{$vac->title}\" изменена");
+                    ///Yii::$app->session->setFlash('success', "Вакансия \"{$vac->title}\" изменена");
                     return $this->redirect('/profile/vacancies.html');
                 }
             } else {

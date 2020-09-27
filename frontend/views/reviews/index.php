@@ -74,7 +74,7 @@ $uType=null;
                     <div class="rev_block">
                         <div class="rev_block_left float_left">
                             <span class="date"><?= date('d.m.Y', $rew->created_at) ?></span>
-                            <img src="<?= $revUser->logo ?>" alt="logo">
+                            <img src="<?= Yii::$app->user->isGuest || !Yii::$app->user->identity->type ? $revUser->comp_logo : $revUser->logo ?>" alt="logo">
                             <span style="display: inline-block;">
                                 <a style="float: none" href="/profile/info/ID<?= $revUser->id ?>.html">
                                 <?= $revUser->firstname . ' ' . $revUser->lastname ?>

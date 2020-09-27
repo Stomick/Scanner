@@ -15,3 +15,4 @@
 [Tue Jun 02 23:05:45.641642 2020] [authz_core:error] [pid 16304:tid 140195970144000] [client 118.25.70.71:12537] AH01630: client denied by server configuration: /var/www/server/frontend/web/.php
 [Tue Sep 01 20:50:28.356653 2020] [core:error] [pid 10036] [client 165.233.38.100:58056] AH00126: Invalid URI in request GET HTTP/1.1 HTTP/1.1
 [Thu Sep 03 05:25:57.991595 2020] [authz_core:error] [pid 1220] [client 47.247.111.116:53224] AH01630: client denied by server configuration: /var/www/server/frontend/web/server-status
+[Sat Sep 19 00:08:48.156586 2020] [authz_core:error] [pid 24229] [client 114.67.237.246:7676] AH01630: client denied by server configuration: /var/www/server/frontend/web/.php

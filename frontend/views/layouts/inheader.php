@@ -135,7 +135,7 @@ if(!$us->type) {
             <span class="round_count"><?=
                 Yii::$app->user->identity->type ?
                     Yii::$app->user->identity->getSendAnswers()->andWhere(['chmtr.status'=>0])->count() :
-                    Yii::$app->user->identity->getTakeAnswers('specialties')->andWhere(['chmtr.status'=>0])->count();
+                    Yii::$app->user->identity->getTakeAnswers()->andWhere(['chmtr.status'=>0])->count();
                 ?></span>
         </p>
         <hr>

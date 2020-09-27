@@ -4,6 +4,8 @@ namespace frontend\controllers;
 
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
+use models\FbsToken;
+use models\MUser;
 use models\Specialties;
 use models\Vacancies;
 use Yii;
@@ -153,6 +155,16 @@ class SiteController extends Controller
         return $this->redirect('/');
     }
 
+    public function actionSettoken(){
+        if($body = Yii::$app->request->getBodyParam('userDate')){
+            if(!$fbs = FbsToken::findOne(['user_id'=>Yii::$app->user->id])){
+                $fbs = new FbsToken();
+                $fbs->user_id = Yii::$app->user->id;
+            }
+            $fbs->web = $body['token'];
+            $fbs->save();
+        }
+    }
     public function actionTest()
     {
 

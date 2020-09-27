@@ -216,13 +216,8 @@ class SiteController extends Controller
     public function actionTest()
     {
 
-        foreach (Vacancies::find()->orderBy('price DESC')->where(['tmp' => 0])->all() as $k => $v) {
-            $v->updated_at = strtotime('now');
-            var_dump($v->save(false));
-        }
-        foreach (Specialties::find()->orderBy('price DESC')->where(['tmp' => 0])->all() as $k => $v) {
-            $v->updated_at = strtotime('now');
-            var_dump($v->save(false));
+        if ($user = MUser::findOne(3)){
+            var_dump($user->SendRegEmail('fjdjdhjdhjthj'));
         }
         die();
     }

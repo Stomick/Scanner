@@ -54,6 +54,7 @@ return [
             'rules' => [
                 'debug' => '/debug',
                 '/' => 'site/index',
+                'settoken' => 'site/settoken',
                 '<action:(login|captcha|registration|authregistr|authlogin|logout|test|reviews")>' => 'site/<action>',
              //   '<controller:\S+>/<action:\S+>' => '<controller><action>',
                 '<controller:\S+>/<action:\S+>/<id:\S+>' => '<controller>/<action>',

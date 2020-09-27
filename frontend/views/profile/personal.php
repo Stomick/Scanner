@@ -51,23 +51,29 @@
 
             <div style="padding-left: 7px;" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pad_mobile_none">
                 <div class="white_bg_block">
-                    <h2>Личные данные</h2>
+                    <h2><?=Yii::$app->user->identity->type ? "Данные Нанимателя" : "Данные Соискателя";?></h2>
                     <div class="row user_info">
                         <?php if(!$prof->type){?>
                         <div class="col-md-12 col-sm-12 col-xs-12 input_row">
                             <span class="title">Фамилия</span>
                             <input type="text" placeholder="Иванов" value="<?= $prof->lastname ?>"
+                                   parsley-type="text" parsley-required="true"
+                                   parsley-error-message="Фамилия не может быть пустой"
                                    name="Prof[lastname]">
                         </div>
                         <div class="col-md-12 col-sm-12 col-xs-12 input_row">
                             <span class="title">Имя</span>
                             <input type="text" placeholder="Иван" value="<?= $prof->firstname ?>"
+                                   parsley-type="text" parsley-required="true"
+                                   parsley-error-message="Имя не может быть пустым"
                                    name="Prof[firstname]">
                         </div>
                         <?php }else{?>
                         <div class="col-md-12 col-sm-12 col-xs-12 input_row">
                             <span class="title">Компания</span>
                             <input type="text" placeholder="" value='<?= $prof->company ?>'
+                                   parsley-type="text" parsley-required="true"
+                                   parsley-error-message="Поле Компания не заполнено. Профиль Нанимателя будет недоступен"
                                    name="Prof[company]">
                         </div>
                         <?php }?>
@@ -104,7 +110,21 @@
                                    id="profaddress" placeholder="Ваш адрес"/>
                         </div>
                         <div class="col-md-12 col-sm-12 col-xs-12 input_row">
-                            <a class="del_profile">Удалить профиль</a>
+                            <a class="del_profile">Отключить публичность</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="white_bg_block">
+                    <h2>Увидомления на почту</h2>
+                    <div class="row user_info">
+                        <div class="col-md-12 col-sm-12 col-xs-12 input_row">
+                            <?php if($prof->type){?>
+                                <input style="float: right" class="check" type="checkbox" name="Prof[noty_spec]" <?= $prof->noty_spec ==1 ? 'checked':''?> id="noty">
+                                <label style="width: 100%;" for="noty">Новые специалисты</label>
+                            <?php }else{?>
+                                <input style="float: right" class="check" type="checkbox" name="Prof[noty_vac]" <?= $prof->noty_vac ==1 ? 'checked':''?> id="noty">
+                                <label style="width: 100%;" for="noty">Новые вакансии в вашем городе</label>
+                            <?php }?>
                         </div>
                     </div>
                 </div>

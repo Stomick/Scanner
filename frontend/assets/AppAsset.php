@@ -18,7 +18,7 @@ class AppAsset extends AssetBundle
         '/css/slick.css',
         '/css/slick-theme.css',
         '/css/fontawesome/all.css',
-        '/css/site.css?v=1.0.48',
+        '/css/site.css?v=1.0.50',
         '/dist/jquery.fancybox.css',
         '/css/bootstrap-slider.css',
     ];

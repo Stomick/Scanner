@@ -50,7 +50,7 @@ $curr = [
     <div id="map" style="height: 88vh;"></div>
 </div>
 
-<script src="/js/markerplace.js?v=1.03" ></script>
+<script src="/js/markerplace.js?v=1.03"></script>
 
 <script defer>
     var lat = 55.7235774;
@@ -69,7 +69,7 @@ $curr = [
         <?php } else {?>
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition);
-            // Getspecialties(lat, lng, zoom);
+            Getspecialties(lat, lng, zoom);
         }
         <?php }?>
 
@@ -172,7 +172,7 @@ $curr = [
 
         var autocomplete = new google.maps.places.Autocomplete(input);
 
-        if(autocomplete) {
+        if (autocomplete) {
             autocomplete.addListener('place_changed', function () {
                 var place = autocomplete.getPlace();
                 var address = '';
@@ -218,11 +218,11 @@ $curr = [
         var infom = [];
 
         function Getspecialties(lat, lng, zoom) {
-            console.log(lat,lng)
+            console.log(lat, lng)
             var token = $('input[name="_csrf"]').val();
             $(".preloader, .load_icon").addClass('display_block');
             $.ajax({
-                url: '/<?=$mtype?>/list.html',
+                url: '/vacancies/list.html',
                 type: 'post',
                 dataType: "json",
                 data: {_csrf: token, lat: lat, lng: lng, z: zoom, f: $('#specfilter').serializeArray()},
@@ -241,7 +241,7 @@ $curr = [
                                     '                        <img class="" src="' + url.url + '"/>' +
                                     '                    </div>';
                             });
-
+                            <?php if(\Yii::$app->mobileDetect->isDesktop){?>
                             var vacStr = '<div class="row" id="vac' + vac.id + '">' +
                                 '    <div class="vacansy_block">' +
                                 '        <div class="col-md-3 col-xs-12">' +
@@ -261,18 +261,21 @@ $curr = [
                                 '</a>' +
                                 '<hr>' +
                                 '<span style="float: left; font-size: 14px;">' + vac.send + '</span>' +
-                                '<a style="float: right; font-size: 14px; margin-top: 5px; display: block;" href="tel:' + vac.phone + '">' + vac.phone + '</a>' +
                                 '        </div>' +
                                 '    </div>' +
                                 '</div>';
+                            <?php }
+                            //Код дл моб верстки в меню
+                            else {?>
 
+
+                            <?php }?>
                             var v = document.getElementById('vac' + vac.id);
                             if (v == null) {
-                                console.log()
                                 $('#menu_container').append(vacStr);
                                 var mark = new google.maps.Marker({
                                     position: {lat: parseFloat(vac.lat), lng: parseFloat(vac.lot)},
-                                    icon: {url:vac.marker,scaledSize: vac.size},
+                                    icon: {url: vac.marker, scaledSize: vac.size},
                                     id: vac.id,
                                 });
                                 markers.push(mark);
@@ -280,7 +283,7 @@ $curr = [
                                     dots: false,
                                     infinite: true,
                                     slidesToShow: 1,
-                                    slidesToScroll: 1,
+                                    slidesToScroll: 1
                                 });
                                 var contentString =
                                     '<div class="block_poly">\n' +
@@ -297,11 +300,8 @@ $curr = [
                                     '<a class="vac_descr" href="/<?=$mtype?>/info/ID' + vac.id + '.html">' +
                                     '<span>' + vac.description + '</span>\n' +
                                     '</a>' +
-
-
                                     // vac.review +
                                     '<span class="vac_respond">' + vac.send + '</span>\n' +
-                                    '<a class="vac_tell" href="tel:' + vac.phone + '">' + vac.phone + '</a>\n' +
                                     //'<a href="/<?=$mtype?>/info/ID' + vac.id + '.html">Подробнее</a>' +
                                     '</div>\n' +
                                     '</div>';
@@ -453,19 +453,23 @@ $curr = [
         width: auto !important;
         height: 24px !important;
     }
+
     div[title] {
         overflow: hidden !important;
         opacity: 0 !important;
     }
+
     <?php } else{?>
     div[title] img {
         width: auto !important;
         height: 24px !important;
     }
+
     div[title] {
         overflow: hidden !important;
         opacity: 0 !important;
     }
+
     <?php }?>
 
     .jobWorker {
@@ -481,7 +485,8 @@ $curr = [
     .jobWorker:hover {
         background-image: url(/img/markers/v/m1-hover.png) !important;
     }
-    .pac-logo:after{
+
+    .pac-logo:after {
         display: none !important;
     }
 </style>
