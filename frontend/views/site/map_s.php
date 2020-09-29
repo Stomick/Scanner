@@ -293,7 +293,47 @@ $curr = [
                             <?php }
                             //Код дл моб верстки в меню
                             else {?>
+                            var vacStr = '<div class="row" id="vac' + vac.id + '">' +
+                                '    <div class="vacansy_block">' +
+                                '        <div class="col-xs-4">' +
+                                '<a href="/<?=$mtype?>/info/ID' + vac.id + '.html">'+
+                                '            <section class="regular_' + vac.id + ' slider">' + imgBlock +
+                                '            </section>' +
+                                '</a>' +
 
+                                '        </div>' +
+                                '<div class="col-xs-8">' +
+                                '<a style="color:#333;" href="/<?=$mtype?>/info/ID' + vac.id + '.html">'+
+                                ' <h3 class="job_name">'+vac.name+'</h3>' +
+                                '</a>' +
+                                '<a href="/profile/reviews/' + vac.prof + '.html">'+
+                                '<div class="rating">\n' +
+                                '<div class="stars">\n' +
+                                '<div class="on" style="width: ' + vac.rating +'%;"></div>\n' +
+                                '<div class="live">\n' +
+                                '<span data-rate="1"></span>\n' +
+                                '<span data-rate="2"></span>\n' +
+                                '<span data-rate="3"></span>\n' +
+                                '<span data-rate="4"></span>\n' +
+                                '<span data-rate="5"></span>\n' +
+                                '</div>\n' +
+                                '</div>\n' +
+                                '</div>\n' +
+                                '</a>' +
+                                '<a href="/<?=$mtype?>/info/ID' + vac.id + '.html">'+
+                                '   <h3 class="job_status">' + vac.title + ' </h3>' +
+                                '</a>' +
+                                '<a href="/<?=$mtype?>/info/ID' + vac.id + '.html">'+
+                                '</a>' +
+                                '                        <span style="font-weight: 500;" class="salary">' + vac.price + '</span>'+
+                                '</div>' +
+                                '<div class="col-xs-12">' +
+                                '<hr>'+
+                                '                        </span>' +
+                                '<span style="float:left; font-size: 16px;">' + vac.send + '</span>'+
+                                '        </div>' +
+                                '    </div>' +
+                                '</div>';
 
                             <?php }?>
                             var v = document.getElementById('vac' + vac.id);

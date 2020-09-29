@@ -71,23 +71,17 @@ $prof = \models\MUser::findOne($info->muser_id);
     <div class="row">
         <div style="overflow: hidden; margin: 0 15px 15px; padding: 10px 20px 30px;" class="white_bg_block">
             <div class="col-md-12 col-sm-12 col-xs-12">
-                <h2 style="margin-bottom: 10px">Тема: "<?= $info->title ?>"</h2>
+                <h2 style="margin-bottom: 10px"><?= $type ?> "<?= $info->title ?>"</h2>
                 <a class="to_all_mess title_link" href="/profile/messages.html">К списку сообщений</a>
-                <span class="vacansies_number"><?= $type ?> №  <?= $info->id ?></span>
-                <div style="margin-bottom: 30px" class="head_block">
+                <div style="margin-bottom: 10px" class="head_block">
                     <div id="head_block_add">
                         <div class="row">
-                            <div class="col-md-2 col-sm-12 col-xs-12">
-                                <span class="salary">
-                                    <?= $info->type == 'piecework' ? $typeWork[$info->type] : $info->price . ' ' . $info->currency . ' ' . $typeWork[$info->type] ?>
-                                </span>
-                            </div>
                             <div class="col-md-4 col-sm-12 col-xs-12">
                                 <?php $user = \models\MUser::findOne($info->muser_id) ?>
                                 <span style="color: #816A7E;" class="company_title">
-                                    <?= $user->company ?>
+                                    <span><?= $user['type'] != 'vacancies' ? 'Компания : '.  $user['company'] : 'Пользователь : ' . $user['name'] ?></span>
                                 </span>
-                            </div>
+                            </div><br/>
                             <div class="col-md-6 hidden-sm hidden-xs"></div>
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="vac_descr_block">

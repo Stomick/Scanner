@@ -1810,6 +1810,7 @@ div.job_status {
     width: max-content;
     color: #fff;
     margin-bottom: 5px;
+    border-radius: 3px;
 }
 
 div.job_status a,
@@ -3489,10 +3490,6 @@ div[title] img {
         text-align: center;
     }
 
-    .vacansy_block .col-xs-12 {
-        text-align: center;
-    }
-
     .load_icon {
         top: 10px;
         width: 20px;
@@ -3559,7 +3556,9 @@ div[title] img {
     }
 
     h3.job_status, h3.job_name {
-        text-align: center;
+        text-align: left;
+        font-size: 18px;
+        font-weight: 600;
     }
 
     .info_profile_page h2 a:first-child {
@@ -3614,12 +3613,12 @@ div[title] img {
     }
 
     .menu_container .vacansy_block .slick-slide {
-        margin: 0 auto 20px;
+        margin: 0 auto 10px;
         float: none;
     }
 
     .menu_container .rating {
-        margin: 10px auto;
+        margin: 10px 0;
         width: max-content;
     }
 
@@ -3845,7 +3844,7 @@ div[title] img {
     }
 
     div.job_status {
-        margin: 0 auto 5px;
+        margin: 0 0 15px 0;
     }
 
     .title_link {

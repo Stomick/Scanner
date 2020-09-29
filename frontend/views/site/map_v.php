@@ -267,7 +267,30 @@ $curr = [
                             <?php }
                             //Код дл моб верстки в меню
                             else {?>
-
+                            var vacStr = '<div class="row" id="vac' + vac.id + '">' +
+                                '    <div class="vacansy_block">' +
+                                '        <div class="col-xs-4">' +
+                                '            <a href="/profile/info/' + vac.prof + '.html">' +
+                                '               <section class="regular_' + vac.id + ' slider">' + imgBlock +
+                                '               </section>' +
+                                '           </a>' +
+                                '        </div>' +
+                                '<div class="col-xs-8">' +
+                                '<div class="job_status">' + vac.vstat + '</div>' +
+                                '            <a style="color:#3D2B3B;;" href="/<?=$mtype?>/info/ID' + vac.id + '.html">' +
+                                '               <h3 class="job_status" style="text-decoration:none">' + vac.title + ' </h3>' +
+                                '           </a>' +
+                                '                        <span style="font-size: 16px; font-weight: 500;" class="salary">' + vac.price + '</span>' +
+                                '<a style="color:#333;" href="/<?=$mtype?>/info/ID' + vac.id + '.html">' +
+                                '</div>' +
+                                '<div class="col-xs-12">' +
+                                '       <span class="information">' + vac.description + '</span>' +
+                                '</a>' +
+                                '<hr>' +
+                                '<span style="float: left; font-size: 14px;">' + vac.send + '</span>' +
+                                '        </div>' +
+                                '    </div>' +
+                                '</div>';
 
                             <?php }?>
                             var v = document.getElementById('vac' + vac.id);
