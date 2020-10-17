@@ -44,6 +44,10 @@ $curr = [
                             <span><?= $vac->type =='piecework' ? $type[$vac->type] : $vac->price . ' ' . $curr[$vac->currency] . ' ' .  $type[$vac->type]?></span>
                         </p>
                         <p>
+                            <span>Описание</span>
+                            <span><?= $vac->description?></span>
+                        </p>
+                        <p>
                             <span>Опубликована</span>
                             <?= $vac->public ? '<span style="color: #0080FF">Да</span>': '<span style="color: #d04a45">Нет</span>'?>
                         </p>
@@ -52,12 +56,6 @@ $curr = [
                 <div class="col-md-6 hidden-sm hidden-xs"></div>
 
                 <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="descr">
-                        <p>Описание</p>
-                    </div>
-                    <p>
-                        <?= $vac->description?>
-                    </p>
                     <div class="link_block">
                         <a class="edit_link" href="/vacancies/edit/ID<?=$vac->id?>.html">Изменить</a>
                         <a class="del_link" href="/vacancies/inarhive/ID<?=$vac->id?>.html">В архив</a>

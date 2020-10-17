@@ -286,9 +286,9 @@ class VacanciesController extends Controller
             foreach (Vacancies::find()->select([
                 'vacancies.*',
                 '(SELECT COUNT(ip) FROM `views_vac` WHERE vac_id=vacancies.id) as cvid',
-                '3956 * 2 * ASIN(SQRT(POWER(SIN((' . $param['lat'] . ' - abs(lat)) * pi()/180 / 2), 2)
-                  + COS(' . $param['lat'] . ' * pi()/180 ) * COS(abs(lat) * pi()/180)
-                  * POWER(SIN((' . $param['lng'] . ' - lot) * pi()/180 / 2), 2) )) as  distance'])
+                '3956 * 2 * ASIN(SQRT(POWER(SIN((' . $param['lat'] . ' - abs(vacancies.lat)) * pi()/180 / 2), 2)
+                  + COS(' . $param['lat'] . ' * pi()/180 ) * COS(abs(vacancies.lat) * pi()/180)
+                  * POWER(SIN((' . $param['lng'] . ' - vacancies.lot) * pi()/180 / 2), 2) )) as  distance'])
                          ->innerJoin('musers', 'musers.id=vacancies.muser_id AND musers.public=1')
                          ->having('distance < 75')
                          ->where($where)
@@ -421,6 +421,7 @@ class VacanciesController extends Controller
             $sp->arhive = ($sp->arhive ? 0 : 1);
             $sp->public = 0;
             if ($sp->update()) {
+                !$sp->arhive ? \Yii::$app->session->setFlash('success', 'Объявление восстановлено.') : \Yii::$app->session->setFlash('success', 'Объявление снято с публикации.');
                 return $this->redirect('/profile/arhive.html');
             }
         }

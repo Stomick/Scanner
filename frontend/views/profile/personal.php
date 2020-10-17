@@ -36,12 +36,12 @@
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 input_row">
                             <span class="title">Безопасность </span>
                             <input type="password"
-                                   name="Prof[password]"
+                                   name="Prof[newPassword]"
                                    id="userpass" placeholder="Укажите старый пароль">
                         </div>
                         <div class="col-md-12 col-sm-12 col-xs-12 input_row">
                             <span class="title">Безопасность </span>
-                            <input type="password" parsley-equalto="#userpass" parsley-validated
+                            <input type="password" parsley-equalto="#userpass"
                                    parsley-error-message="пароли не совпадают" parsley-trigger="keyup"
                                    placeholder="Укажите новый пароль">
                         </div>
@@ -57,24 +57,23 @@
                         <div class="col-md-12 col-sm-12 col-xs-12 input_row">
                             <span class="title">Фамилия</span>
                             <input type="text" placeholder="Иванов" value="<?= $prof->lastname ?>"
-                                   parsley-type="text" parsley-required="true"
+                                   parsley-required="true"
                                    parsley-error-message="Фамилия не может быть пустой"
                                    name="Prof[lastname]">
                         </div>
                         <div class="col-md-12 col-sm-12 col-xs-12 input_row">
                             <span class="title">Имя</span>
                             <input type="text" placeholder="Иван" value="<?= $prof->firstname ?>"
-                                   parsley-type="text" parsley-required="true"
+                                   parsley-required="true"
                                    parsley-error-message="Имя не может быть пустым"
                                    name="Prof[firstname]">
                         </div>
                         <?php }else{?>
                         <div class="col-md-12 col-sm-12 col-xs-12 input_row">
                             <span class="title">Компания</span>
-                            <input type="text" placeholder="" value='<?= $prof->company ?>'
-                                   parsley-type="text" parsley-required="true"
+                            <input type="text" placeholder="" required value='<?= $prof->company ?>'
                                    parsley-error-message="Поле Компания не заполнено. Профиль Нанимателя будет недоступен"
-                                   name="Prof[company]">
+                                   name="Prof[company]"/>
                         </div>
                         <?php }?>
                         <div class="col-md-12 col-sm-12 col-xs-12 input_row">
@@ -110,7 +109,7 @@
                                    id="profaddress" placeholder="Ваш адрес"/>
                         </div>
                         <div class="col-md-12 col-sm-12 col-xs-12 input_row">
-                            <a class="del_profile">Отключить публичность</a>
+                            <a class="del_profile" href="/deactivate.html">Отключить публичность</a>
                         </div>
                     </div>
                 </div>
@@ -138,7 +137,7 @@
 <script>
     $(document).ready(function () {
         CropperAvatar.init("<?= !$prof->type ? $prof->logo :$prof->comp_logo?>");
-        $('.cr-slider').parsley({min: 0, max: 10000})
+        $('.cr-slider').parsley({min: 0, max: 10000});
         var phoneMask = IMask(
             document.getElementById('profphone'), {
                 mask: '+{7}(000)000-00-00'
@@ -164,7 +163,7 @@
                 ].join(' ');
             }
         });
-    };
+    }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBI56UwMrhNrE4_FDt-Ks1lBhk2wBWxbBg&language=ru&libraries=places&callback=initAutocomplete"></script>
 <script src="/plugins/form/form.js"></script>

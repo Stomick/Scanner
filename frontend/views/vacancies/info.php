@@ -36,9 +36,6 @@ $type = [
                              alt="logo">
                     </div>
                     <div class="col-md-8 col-sm-8 col-xs-12">
-                        <?php if (!Yii::$app->user->isGuest) { ?>
-                            <span class="user_info_span"><?= $prof->getBirthday() ?></span><br/>
-                        <?php } ?>
                         <span class="user_info_span">
                             <span class="glyphicon glyphicon-map-marker"></span>
                              <?= $prof->address ?>

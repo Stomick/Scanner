@@ -2,13 +2,42 @@
 $this->title = "Рейтинг и отзывы";
 $ans = \models\Reviews::findOne(['answer' => $rev->id]);
 ?>
+<style>
+    .rating_block {
+        width: 105px;
+        height: 20px;
+    }
 
+    .rating_block input[type="radio"],
+    .rating_block input[type="radio"] + label:before {
+        display: none;
+    }
+
+    .label_rating {
+        float: right;
+        display: block;
+        width: 21px;
+        height: 20px;
+        background: url(/img/stars.png) no-repeat 50% 0;
+        cursor: pointer;
+    }
+
+    .rating_block .label_rating:hover,
+    .rating_block .label_rating:hover ~ .label_rating,
+    .rating_block input[type="radio"]:checked ~ .label_rating {
+        background-position: 50% -20px;
+    }
+</style>
 <div class="container profile_page">
     <div class="profile_info reviews_index reviews_info">
         <div style="overflow: hidden; padding: 10px 20px;" class="row white_bg_block">
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <h2>Отзыв
-                    <a href="/profile/reviews/ID<?=$rev->user_to?>.html">К списку отзывов</a>
+                    <?php if(!Yii::$app->user->isGuest && Yii::$app->user->id != $rev->user_to){?>
+                        <a href="/profile/reviews/ID<?=$rev->user_to?>.html">К списку отзывов</a>
+                    <?php } else {?>
+                        <a href="/profile/reviews.html">К списку отзывов</a>
+                    <?php }?>
                 </h2>
                 <div class="rev_block_left">
                     <img src="<?= Yii::$app->user->isGuest || !Yii::$app->user->identity->type ? $user->comp_logo : $user->logo ?>" alt="logo">
@@ -63,10 +92,11 @@ $ans = \models\Reviews::findOne(['answer' => $rev->id]);
                     </div>
                 </div>
             <?php } ?>
-
             <?php if (!Yii::$app->user->isGuest){?>
                     <?php if($rev->user_to == Yii::$app->user->id){?>
-                        <a class="answer_link" data-toggle="modal" data-target="#myModalAnswer">Ответить</a>
+                            <a class="answer_link" data-toggle="modal" data-target="#myModalAnswer">
+                                <?= $ans ? "Изменить ответ": "Ответить"?>
+                            </a>
                         <?php if($ans){?>
                             <a class="del_link" href="/reviews/delete/ID<?=$ans->id?>.html">Удалить свой ответ</a>
                         <?php }?>
@@ -125,7 +155,7 @@ $ans = \models\Reviews::findOne(['answer' => $rev->id]);
                 <div class="modal-content">
                     <div class="modal-header">
                         <h3>
-                            Ответить
+                            <?= $ans->id ? "Изменить ответ" : "Ответить"?>
                         </h3>
                     </div>
                     <div style="overflow: hidden;" class="modal-body">
@@ -138,45 +168,3 @@ $ans = \models\Reviews::findOne(['answer' => $rev->id]);
         </div>
     </div
 <?php } ?>
-<div class="modal fade" id="myModalAnswerFinish" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" style="padding: 5% 0px" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <h3>
-                    Сообщение<br>
-                    успешно отправлено!
-                </h3>
-            </div>
-        </div>
-    </div>
-</div>
-<style>
-    .rating_block {
-        width: 105px;
-        height: 20px;
-    }
-
-    .rating_block input[type="radio"],
-    .rating_block input[type="radio"] + label:before {
-        display: none;
-    }
-
-    .label_rating {
-        float: right;
-        display: block;
-        width: 21px;
-        height: 20px;
-        background: url(/img/stars.png) no-repeat 50% 0;
-        cursor: pointer;
-    }
-
-    .rating_block .label_rating:hover,
-    .rating_block .label_rating:hover ~ .label_rating,
-    .rating_block input[type="radio"]:checked ~ .label_rating {
-        background-position: 50% -20px;
-    }
-</style>

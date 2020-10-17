@@ -103,7 +103,7 @@ class ReviewsController extends Controller
                 }
                 if($reviews->update()){
                     $user = MUser::findOne($reviews->user_to);
-                    return $this->redirect("/reviews/info/ID".$user->id.".html");
+                    return $this->redirect("/reviews/info/ID".$rev['answer'].".html");
                 }
             }elseif (key_exists('answer',$rev) && Reviews::findOne($rev['answer'])){
                 $revToAns = Reviews::findOne($rev['answer']);
@@ -124,6 +124,7 @@ class ReviewsController extends Controller
                     return $this->redirect("/reviews/info/ID".$rev['answer'].".html");
                 }
             }
+
         }
         return $this->redirect('/');
     }

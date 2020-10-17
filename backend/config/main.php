@@ -55,7 +55,7 @@ return [
             'showScriptName' => false,
             'rules' => [
                 '/' => 'site/index',
-                '<action:(login|debug|signup|getcity|logout|vacancies|works|test|vacans|spec|docs)>' => 'site/<action>',
+                '<action:(login|debug|signup|getcity|logout|vacancies|works|test|vacans|spec|docs|new)>' => 'site/<action>',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
             ]

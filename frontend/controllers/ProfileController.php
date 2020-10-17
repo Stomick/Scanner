@@ -130,12 +130,12 @@ class ProfileController extends Controller
         return $this->redirect('/');
     }
 
-    public function actionSpecialties($id=null)
+    public function actionSpecialties($id = null)
     {
         if ($id) {
             $id = str_replace('ID', '', $id);
             $user = MUser::findOne($id);
-            return $this->render('index', ['prof' => $user, 'page' => 'spec', 'spec' => Specialties::findAll(['muser_id' => $user->id,'tmp'=>0,'arhive'=>0]),
+            return $this->render('index', ['prof' => $user, 'page' => 'spec', 'spec' => Specialties::findAll(['muser_id' => $user->id, 'tmp' => 0, 'arhive' => 0]),
                 'li' => [
                     [
                         'href' => "/profile/info/ID$id.html",
@@ -151,12 +151,12 @@ class ProfileController extends Controller
         } elseif (!Yii::$app->user->isGuest) {
             $id = Yii::$app->user->id;
             $user = MUser::findOne($id);
-            if($user->id == Yii::$app->user->id){
+            if ($user->id == Yii::$app->user->id) {
                 $type = 1;
-            }else{
+            } else {
                 $type = 2;
             }
-            return $this->render('my', ['prof' => $user, 'page' => 'myspec', 'spec' => Specialties::findAll(['muser_id' => $user->id,'tmp'=>0,'arhive'=>0]),
+            return $this->render('my', ['prof' => $user, 'page' => 'myspec', 'spec' => Specialties::findAll(['muser_id' => $user->id, 'tmp' => 0, 'arhive' => 0]),
                 'li' => [
                     [
                         'href' => '/profile.html',
@@ -187,7 +187,7 @@ class ProfileController extends Controller
         if ($id) {
             $id = str_replace('ID', '', $id);
             $user = MUser::findOne($id);
-            return $this->render('index', ['prof' => $user, 'page' => 'vacans', 'vacans' => Vacancies::find()->where(['muser_id' => $user->id,'tmp'=>0,'arhive'=>0])->all(),
+            return $this->render('index', ['prof' => $user, 'page' => 'vacans', 'vacans' => Vacancies::find()->where(['muser_id' => $user->id, 'tmp' => 0, 'arhive' => 0])->all(),
                 'li' => [
                     [
                         'href' => "/profile/info/ID$id.html",
@@ -203,7 +203,7 @@ class ProfileController extends Controller
         } elseif (!Yii::$app->user->isGuest) {
             $id = Yii::$app->user->id;
             $user = MUser::findOne($id);
-            return $this->render('my', ['prof' => $user, 'page' => 'myvacans', 'vacans' => Vacancies::find()->where(['muser_id' => $id,'tmp'=>0,'arhive'=>0])->all(),
+            return $this->render('my', ['prof' => $user, 'page' => 'myvacans', 'vacans' => Vacancies::find()->where(['muser_id' => $id, 'tmp' => 0, 'arhive' => 0])->all(),
                 'li' => [
                     [
                         'href' => '/profile.html',
@@ -229,13 +229,14 @@ class ProfileController extends Controller
         }
     }
 
-    public function actionArhive(){
+    public function actionArhive()
+    {
         if (!Yii::$app->user->isGuest) {
             $id = Yii::$app->user->id;
             $user = MUser::findOne($id);
             return $this->render('my', ['prof' => $user, 'page' => 'arhive',
                 'title' => !$user->type ? 'Специальности' : 'Вакансии',
-                'vacans' => $user->type ? Vacancies::find()->where(['muser_id' => $id,'tmp'=>0,'arhive'=> 1])->all() : Specialties::find()->where(['muser_id' => $id,'tmp'=>0 , 'arhive'=> 1])->all(),
+                'vacans' => $user->type ? Vacancies::find()->where(['muser_id' => $id, 'tmp' => 0, 'arhive' => 1])->all() : Specialties::find()->where(['muser_id' => $id, 'tmp' => 0, 'arhive' => 1])->all(),
                 'li' => [
                     [
                         'href' => '/profile.html',
@@ -290,9 +291,9 @@ class ProfileController extends Controller
             }
 
             if (!\Yii::$app->user->isGuest && !Yii::$app->user->identity->type) {
-                $ret = Vacancies::find()->where(['muser_id' => $user->id])->andWhere(['tmp'=>0 , 'public'=> 1])->asArray();
+                $ret = Vacancies::find()->where(['muser_id' => $user->id])->andWhere(['tmp' => 0, 'public' => 1])->asArray();
             } else {
-                $ret = Specialties::find()->where(['muser_id' => $user->id])->andWhere(['tmp'=>0, 'public'=> 1])->asArray();
+                $ret = Specialties::find()->where(['muser_id' => $user->id])->andWhere(['tmp' => 0, 'public' => 1])->asArray();
             }
 
             return $this->render('info', ['prof' => $user, 'ret' => $ret]);
@@ -354,18 +355,18 @@ class ProfileController extends Controller
             }
         }
         $where = 1;
-        if(\Yii::$app->user->isGuest){
+        if (\Yii::$app->user->isGuest) {
             $where = 'user_from!=' . $id;
             $type = 'employer';
-            if(!$user = MUser::findOne($id)) {
+            if (!$user = MUser::findOne($id)) {
                 return $this->redirect('/');
             }
-        }else {
-            if ($id== null && $id=!Yii::$app->user->id) {
+        } else {
+            if ($id == null && $id = !Yii::$app->user->id) {
                 $type = Yii::$app->user->identity->type ? 'employer' : 'worker';
-            } else if($user = MUser::findOne($id)) {
+            } else if ($user = MUser::findOne($id)) {
                 $type = $user->type ? 'employer' : 'worker';
-            }else {
+            } else {
                 $type = !Yii::$app->user->identity->type ? 'employer' : 'worker';
             }
         }
@@ -402,9 +403,9 @@ class ProfileController extends Controller
                      ->all() as $k => $r) {
             $models[$k + 1] = $r;
         }
-        if($id == null && !Yii::$app->user->isGuest){
+        if ($id == null && !Yii::$app->user->isGuest) {
             $page = 'my';
-        }else{
+        } else {
             $page = 'index';
         }
         return $this->render("../reviews/{$page}", [
@@ -422,11 +423,11 @@ class ProfileController extends Controller
     {
         if ($user = MUser::findOne(Yii::$app->user->id)) {
             $body = Yii::$app->request->getBodyParam('Prof');
-            if(!key_exists('noty_vac',$body)){
-                $user->noty_vac =0;
+            if (!key_exists('noty_vac', $body)) {
+                $user->noty_vac = 0;
             }
-            if (!key_exists('noty_spec',$body)){
-                $user->noty_spec =0;
+            if (!key_exists('noty_spec', $body)) {
+                $user->noty_spec = 0;
             }
 
             foreach ($body as $k => $v) {
@@ -438,7 +439,7 @@ class ProfileController extends Controller
                 }
             }
 
-            if($user->update()){
+            if ($user->update()) {
                 Yii::$app->session->setFlash('success', 'Данные пользователя успешно изменены');
             }
             if ($photo = Yii::$app->request->getBodyParam('Photos')) {
@@ -721,26 +722,47 @@ class ProfileController extends Controller
 
     public function actionActivation($key = null)
     {
-        if ($us = MUser::findOne(['verification_token' => $key])) {
+        if ($us = MUser::find()->where(['verification_token' => $key])->one()) {
             $us->status = 10;
-            $us->update();
-            if (Yii::$app->user->login($us, 3600 * 24 * 30)) {
-                return $this->redirect('/profile.html');
+            if($us->update(false)) {
+                if (Yii::$app->user->login($us, 3600 * 24 * 30)) {
+                    return $this->redirect('/profile.html');
+                }
             }
-        } else {
+        }
+        return $this->redirect('/');
+    }
+
+    public function actionRestorepass($key = null, $email = null)
+    {
+        if (Yii::$app->request->isGet) {
+            if ($us = MUser::findOne(['verification_token' => $key, 'email' => $email])) {
+                return $this->render('ressetpass', ['user' => $us]);
+            } else {
+                Yii::$app->session->setFlash('success', 'Ссылна на восстановление устарела или не действительна');
+                return $this->redirect('/');
+            }
+        }elseif(Yii::$app->request->isPost){
+            if($body = Yii::$app->request->getBodyParam('Restore')){
+                if(RegForm::resetpass($body['auth'],$body['password'])) {
+
+                }
+            }
             return $this->redirect('/');
         }
     }
 
-    public function actionResetpassvord($key = null)
-    {
-        if ($us = MUser::findOne(['verification_token' => $key])) {
-            $us->status = 10;
-            $us->update();
-            if (Yii::$app->user->login($us, 3600 * 24 * 30)) {
-                return $this->redirect('/profile.html');
+    public function actionDeactivate(){
+        if(!Yii::$app->user->isGuest){
+            $us = MUser::findOne(Yii::$app->user->id);
+            $us->public = 0;
+            $us->status = 5;
+            if($us->update()){
+                Specialties::updateAll(['arhive'=> 1],['muser_id'=> $us->id]);
+                Vacancies::updateAll(['arhive'=> 1],['muser_id'=> $us->id]);
             }
-        } else {
+            Yii::$app->session->setFlash('success', 'Публичность отключена, все объявления помещены в архив!');
+            Yii::$app->user->logout();
             return $this->redirect('/');
         }
     }

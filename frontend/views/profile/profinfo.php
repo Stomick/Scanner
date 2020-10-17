@@ -43,7 +43,7 @@
                     <div class="links_block">
                         <a href="/profile/reviews/ID<?= $prof->id ?>.html">Отзывы</a>
                         <a href="/profile/info/ID<?= $prof->id ?>.html">Смотреть профиль</a>
-                        <?php if(!Yii::$app->user->isGuest && !Yii::$app->user->identity->type){?>
+                        <?php if(!Yii::$app->user->isGuest && Yii::$app->user->identity->type){?>
                             <a href="/profile/specialties/ID<?= $prof->id ?>.html">К списку специальностей</a>
                         <?php } else {?>
                             <a href="/profile/vacancies/ID<?= $prof->id ?>.html">К списку вакансий</a>

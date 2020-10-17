@@ -35,7 +35,7 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'signup', 'error', 'getcity', 'vacancies', 'works', 'test', 'vacans', 'spec', 'docs'],
+                        'actions' => ['login', 'signup', 'error', 'getcity', 'vacancies', 'works', 'test', 'vacans', 'spec', 'docs','new'],
                         'allow' => true,
                     ],
                     [
@@ -213,14 +213,6 @@ class SiteController extends Controller
         }
     }
 
-    public function actionTest()
-    {
-
-        if ($user = MUser::findOne(3)){
-            var_dump($user->SendRegEmail('fjdjdhjdhjthj'));
-        }
-        die();
-    }
 
     public function actionDocs($key)
     {
@@ -363,6 +355,78 @@ class SiteController extends Controller
                         }
                     }
                 }
+            }
+        }
+    }
+    public function actionNew($key)
+    {
+        if ($key == '95bi7s24IdhQ6srUOQRj') {
+            if($users = MUser::findAll(['type'=> 1])) {
+                foreach ($users as $us) {
+                    $spes = [];
+                    $where = 'specialties.created_at BETWEEN ' . strtotime('-1 day') . ' AND ' . strtotime('now');
+                    foreach (Specialties::find()->select([
+                        'specialties.*',
+                        'cat.name',
+                        'ph.url as logo',
+                        'musers.firstname',
+                        'musers.lastname',
+                        '3956 * 2 * ASIN(SQRT(POWER(SIN((' . $us->lat . ' - abs(specialties.lat)) * pi()/180 / 2), 2)
+                  + COS(' . $us->lat . ' * pi()/180 ) * COS(abs(specialties.lat) * pi()/180)
+                  * POWER(SIN((' . $us->lng . ' - specialties.lot) * pi()/180 / 2), 2) )) as  distance'])
+                                 ->innerJoin('musers', 'musers.id=specialties.muser_id AND musers.public=1')
+                                 ->innerJoin('categories cat', 'cat.category_id=specialties.category_id')
+                                 ->innerJoin('photos ph', 'ph.type_id=specialties.muser_id and ph.type="logo"')
+                                 ->innerJoin('views_spec as vs', 'vs.ip!=musers.ip AND spec_id=specialties.id')
+                                 ->where($where)
+                                 ->andWhere(['arhive' => 0, 'specialties.public' => 1, 'tmp' => 0])
+                                 ->having('distance < 75')
+                                 ->orderBy('distance')
+                                 ->asArray()->all() as $k => $v) {
+
+                        $spes[$k] = [
+                            'logo' => 'https://jobscanner.online' . $v['logo'],
+                            'category' => $v['name'],
+                            'name' => $v['firstname'] . ' ' . $v['lastname'],
+                            'href' => "<a href='https://jobscanner.online/specialties/info/ID" . $v['id'] . ".html'>" . $v['title'] . "</a>",
+                            'date' => date('d-m-Y', $v['created_at'])
+                        ];
+                    }
+                    $us->SendNewWorkEmail($spes , 'Специальности');
+                }
+            }
+            if($users = MUser::findAll(['type'=> 0])) {
+                $spes = [];
+                $where = 'vacancies.created_at  BETWEEN  ' . strtotime('-1 day') . ' AND ' . strtotime('now');
+                foreach ($users as $us) {
+                    foreach (Vacancies::find()->select([
+                        'vacancies.*',
+                        'cat.name',
+                        'ph.url as comp_logo',
+                        'musers.company',
+                        '3956 * 2 * ASIN(SQRT(POWER(SIN((' . $us->lat . ' - abs(vacancies.lat)) * pi()/180 / 2), 2)
+                  + COS(' . $us->lat . ' * pi()/180 ) * COS(abs(vacancies.lat) * pi()/180)
+                  * POWER(SIN((' . $us->lng . ' - vacancies.lot) * pi()/180 / 2), 2) )) as  distance'])
+                                 ->innerJoin('musers', 'musers.id=vacancies.muser_id AND musers.public=1')
+                                 ->innerJoin('categories cat', 'cat.category_id=vacancies.category_id')
+                                 ->innerJoin('photos ph', 'ph.type_id=vacancies.muser_id and ph.type="logo"')
+                                 ->innerJoin('views_vac as vs', 'vs.ip!=musers.ip AND vac_id=vacancies.id')
+                                 ->where($where)
+                                 ->andWhere(['arhive' => 0, 'vacancies.public' => 1, 'tmp' => 0])
+                                 ->having('distance < 75')
+                                 ->orderBy('distance')
+                                 ->asArray()->all() as $k => $v) {
+
+                        $spes[$k] = [
+                            'logo' => 'https://jobscanner.online' . $v['logo'],
+                            'category' => $v['name'],
+                            'name' => $v['company'] ,
+                            'href' => "<a href='https://jobscanner.online/vacancies/info/ID" . $v['id'] . ".html'>" . $v['title'] . "</a>",
+                            'date' => date('d-m-Y', $v['created_at'])
+                        ];
+                    }
+                }
+                $us->SendNewWorkEmail($spes, 'Вакансии');
             }
         }
     }

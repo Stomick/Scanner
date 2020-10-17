@@ -62,6 +62,20 @@ class RegForm extends Model
 
     }
 
+    public static function resetpass($token, $password)
+    {
+        if($user = MUser::findOne(['verification_token' => $token])) {
+            $user->setPassword($password);
+            $user->generateEmailVerificationToken();
+
+            if ($user->update()) {
+                return true;
+            }
+        }return false;
+
+    }
+
+
     /**
      * Sends confirmation email to user
      * @param User $user user model to with email should be send

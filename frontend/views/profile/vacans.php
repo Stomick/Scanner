@@ -39,25 +39,18 @@ $this->title = "Вакансии ";
                             <span><?= $vac->experience ?></span>
                         </p>
                         <p>
-                            <span>Адрес</span>
-                            <span><?= $vac->address?></span>
-                        </p>
-                        <p>
                             <span>Оплата</span>
                             <span><?= $vac->type =='piecework' ? $type[$vac->type] : $vac->price . ' ' . $curr[$vac->currency] . ' ' .  $type[$vac->type]?></span>
                         </p>
-
+                        <p>
+                            <span>Описание</span>
+                            <span><?= $vac->description?></span>
+                        </p>
                     </div>
                 </div>
                 <div class="col-md-6 hidden-sm hidden-xs"></div>
 
                 <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="descr">
-                        <p>Описание</p>
-                    </div>
-                    <p>
-                        <?= $vac->description?>
-                    </p>
                     <div class="link_block">
                         <a class="more" href="/vacancies/info/ID<?=$vac->id?>.html">Подробнее</a>
                     </div>

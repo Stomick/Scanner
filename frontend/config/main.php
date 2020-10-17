@@ -54,7 +54,9 @@ return [
             'rules' => [
                 'debug' => '/debug',
                 '/' => 'site/index',
+                'restorepas' => 'site/restorepas',
                 'settoken' => 'site/settoken',
+                'deactivate' => 'profile/deactivate',
                 '<action:(login|captcha|registration|authregistr|authlogin|logout|test|reviews")>' => 'site/<action>',
              //   '<controller:\S+>/<action:\S+>' => '<controller><action>',
                 '<controller:\S+>/<action:\S+>/<id:\S+>' => '<controller>/<action>',

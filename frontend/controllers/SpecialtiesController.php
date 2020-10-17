@@ -209,7 +209,7 @@ class SpecialtiesController extends Controller
                     ->innerJoin('chat_user_to_rooms cutr', 'cutr.room_id=chat_rooms.room_id AND cutr.user_id!=' . Yii::$app->user->id)
                     ->where(['chat_rooms.room_id' => $id])->one()) {
                     $spec = Specialties::findOne($room->type_id);
-                    return $this->render('/messages/discussion', ['info' => $spec, 'type' => 'Специальность', 'page_id' => $room->room_id,'message' => $mess]);
+                    return $this->render('/messages/discussion', ['info' => $spec , 'type' => 'Специальность', 'page_id' => $room->room_id,'message' => $mess]);
                 }
             }
         }
@@ -298,6 +298,7 @@ class SpecialtiesController extends Controller
             $sp->arhive = ($sp->arhive ? 0 : 1);
             $sp->public = 0;
             if ($sp->update()) {
+                !$sp->arhive ? \Yii::$app->session->setFlash('success', 'Объявление восстановлено.') : \Yii::$app->session->setFlash('success', 'Объявление снято с публикации.');
                 return $this->redirect('/profile/arhive.html');
             }
         }
@@ -602,9 +603,9 @@ class SpecialtiesController extends Controller
                 'musers.logo',
                 '' .
                 '(SELECT COUNT(ip) FROM `views_spec` WHERE spec_id=specialties.id) as cvid',
-                '3956 * 2 * ASIN(SQRT(POWER(SIN((' . $param['lat'] . ' - abs(lat)) * pi()/180 / 2), 2)
-                  + COS(' . $param['lat'] . ' * pi()/180 ) * COS(abs(lat) * pi()/180)
-                  * POWER(SIN((' . $param['lng'] . ' - lot) * pi()/180 / 2), 2) )) as  distance'])
+                '3956 * 2 * ASIN(SQRT(POWER(SIN((' . $param['lat'] . ' - abs(specialties.lat)) * pi()/180 / 2), 2)
+                  + COS(' . $param['lat'] . ' * pi()/180 ) * COS(abs(specialties.lat) * pi()/180)
+                  * POWER(SIN((' . $param['lng'] . ' - specialties.lot) * pi()/180 / 2), 2) )) as  distance'])
                          ->innerJoin('musers', 'musers.id=specialties.muser_id AND musers.public=1')
                          ->where($where)
                          ->andWhere(['arhive' => 0, 'specialties.public' => 1, 'tmp'=>0])

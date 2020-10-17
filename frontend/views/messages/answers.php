@@ -1,5 +1,5 @@
 <?php
-$this->title = "Мои сообщения";
+$this->title = !Yii::$app->user->identity->type ? "Мои сообщения" : "Мои отклики";
 $type = [
     'hour' => 'В час',
     'day' => 'В день',
@@ -60,8 +60,8 @@ $curr = [
                                             <div class="col-md-3 col-sm-12 col-xs-12">
                                                 <div class="second_col">
                                                     <span><?= $mess['type'] == 'vacancies' ? 'Вакансия' : 'Специальность'?> : <?= $mess['title']?></span><br>
-                                                    <span><?= $mess['type'] != 'vacancies' ? 'Компания : '.  $mess['company'] : 'Пользователь : ' . $mess['name'] ?></span><br>
-                                                    <span class="underline cursive red"><?= $vac->type =='piecework' ? $type[$vac->type] : $vac->price . ' ' . $curr[$vac->currency] . ' ' .  $type[$vac->type]?></span>
+                                                    <span class="underline cursive red"><?= $vac->type =='piecework' ? $type[$vac->type] : $vac->price . ' ' . $curr[$vac->currency] . ' ' .  $type[$vac->type]?></span><br>
+                                                    <span><?= $mess['type'] != 'vacancies' ? 'Компания : '.  $mess['company'] : 'Пользователь : ' . $mess['name'] ?></span>
                                                 </div>
                                             </div>
                                             <div class="col-md-5 col-sm-12 col-xs-12">

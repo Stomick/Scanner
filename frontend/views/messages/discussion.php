@@ -16,7 +16,11 @@ $prof = \models\MUser::findOne($info->muser_id);
     <div class="row">
         <div style="overflow: hidden; margin: 0 15px 15px; padding: 10px 20px;" class="white_bg_block">
             <div class="col-md-6 col-sm-12 col-xs-12">
-                <h2><?= Yii::$app->user->isGuest || !Yii::$app->user->identity->type ? $prof->company : $prof->firstname . ' ' . $prof->lastname ?>
+                <h2><?php if(Yii::$app->user->id == $info->muser_id){?>
+                             <?= Yii::$app->user->identity->type ? $prof->company : $prof->firstname . ' ' . $prof->lastname ?>
+                    <?php }else{?>
+                             <?= !Yii::$app->user->identity->type ? $prof->company : $prof->firstname . ' ' . $prof->lastname ?>
+                    <?php }?>
                     <div class="rating">
                         <div class="stars">
                             <div class="on" style="width: <?= 20 * $prof->myRating() ?>%;"></div>
@@ -33,9 +37,15 @@ $prof = \models\MUser::findOne($info->muser_id);
                 </h2>
                 <div class="row">
                     <div class="col-md-4 col-sm-4 col-xs-12">
-                        <img class="info_logo_user"
-                             src="<?= Yii::$app->user->isGuest || !Yii::$app->user->identity->type ? $prof->comp_logo : $prof->logo ?>"
+                        <?php if(Yii::$app->user->id == $info->muser_id){?>
+                            <img class="info_logo_user"
+                             src="<?= Yii::$app->user->identity->type ? $prof->comp_logo : $prof->logo ?>"
                              alt="logo">
+                        <?php }else{?>
+                            <img class="info_logo_user"
+                                 src="<?= !Yii::$app->user->identity->type ? $prof->comp_logo : $prof->logo ?>"
+                                 alt="logo">
+                        <?php }?>
                     </div>
                     <div class="col-md-8 col-sm-8 col-xs-12">
                         <?php if (!Yii::$app->user->isGuest) { ?>
@@ -79,7 +89,7 @@ $prof = \models\MUser::findOne($info->muser_id);
                             <div class="col-md-4 col-sm-12 col-xs-12">
                                 <?php $user = \models\MUser::findOne($info->muser_id) ?>
                                 <span style="color: #816A7E;" class="company_title">
-                                    <span><?= $user['type'] != 'vacancies' ? 'Компания : '.  $user['company'] : 'Пользователь : ' . $user['name'] ?></span>
+                                    <span><?= $user['type'] != 'vacancies' ? 'Компания : '.  $user['company'] : 'Пользователь : ' . $user['firstname'] .' ' . $user['lastname'] ?></span>
                                 </span>
                             </div><br/>
                             <div class="col-md-6 hidden-sm hidden-xs"></div>

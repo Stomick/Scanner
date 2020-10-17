@@ -2074,7 +2074,8 @@ span.salary {
     margin-bottom: 15px;
 }
 
-.user_info span.title {
+.user_info span.title,
+.resset_pass span.title{
     width: 100%;
     display: block;
     height: 21px;
@@ -2082,13 +2083,18 @@ span.salary {
     color: #816A7E;
 }
 
-.user_info input {
+.user_info input,
+.resset_pass input.password {
     border: none;
     border-bottom: 1px solid #816A7E;
     width: 100%;
     color: #3D2B3B;
     font-weight: bold;
     padding: 0 0 5px 0;
+}
+
+.resset_pass input.password {
+    margin-bottom: 15px;
 }
 
 .user_info textarea {

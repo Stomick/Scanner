@@ -61,7 +61,17 @@ class Login extends Model
 
         if ($this->validate()) {
             if($user = $this->getUser()) {
+                if($user->status == 5){
+                    $user->verification_token = Yii::$app->security->generateRandomString(32);
+                    if($user->update()) {
+                        $user->SendActivEmail($user->verification_token);
+                        Yii::$app->session->setFlash('success', 'Письмо для активации аккаунта отправленно на ваш емаил');
+                        return false;
+                    }
+                }
                 if($login = Yii::$app->user->login($user,  3600 * 24 * 30 )) {
+                    $this->_user->ip = ip2long(Yii::$app->getRequest()->getUserIP());
+                    $this->_user->save();
                     return true;
                 }else{
                     return false;

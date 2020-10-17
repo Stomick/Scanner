@@ -19,6 +19,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\RegForm;
 use frontend\models\ContactForm;
+use function GuzzleHttp\Psr7\str;
 
 /**
  * Site controller
@@ -36,7 +37,7 @@ class SiteController extends Controller
                 'only' => ['logout', 'registration'],
                 'rules' => [
                     [
-                        'actions' => ['registration', 'login', 'index' , 'test'],
+                        'actions' => ['registration', 'login', 'index' , 'test' , 'restorepas'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
@@ -109,11 +110,12 @@ class SiteController extends Controller
 
         $model = new Login();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->redirect($_SERVER['HTTP_REFERER']);
+            return $this->redirect('/');
         } else {
             $model->password = '';
             return $this->redirect('/');
         }
+        return $this->redirect('/');
     }
 
     /**
@@ -168,14 +170,16 @@ class SiteController extends Controller
     public function actionTest()
     {
 
-        foreach (Vacancies::find()->orderBy('price DESC')->where(['tmp'=>0])->all() as $k => $v) {
-            $v->updated_at = strtotime('now');
-            var_dump($v->save(false));
-        }
-        foreach (Specialties::find()->orderBy('price DESC')->where(['tmp'=>0])->all() as $k => $v) {
-            $v->updated_at = strtotime('now');
-            var_dump($v->save(false));
-        }
         die();
+    }
+
+    public function actionRestorepas(){
+        if($em = Yii::$app->request->getBodyParam('Restore')){
+            if($user = MUser::findByEmail($em)){
+                $user->SendRestorePassEmail();
+                return $this->redirect('/');
+            }
+        }
+        return $this->redirect('/');
     }
 }
